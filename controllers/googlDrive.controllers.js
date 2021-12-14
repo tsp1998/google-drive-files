@@ -21,7 +21,18 @@ exports.uploadFile = async (req, res, next) => {
             console.log(`error`, error)
         }
 
+        try {
+            const linksResult = await googlDriveServices.generatePublicUrl(result.data.id)
+            const links = linksResult.data
+            if (links && links.webContentLink) {
+                result.data.url = links.webContentLink
+            }
+        } catch (error) {
+            console.log(`error`, error)
+        }
+
         delete result.data.kind
+        delete result.data.name
         res.json({
             status: 'success',
             file: result.data

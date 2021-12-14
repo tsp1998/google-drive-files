@@ -8,7 +8,7 @@ const multerMiddleware = multer({
         },
         filename: (req, file, done) => {
             const extension = `.${file.mimetype.split('/')[1]}` || '.jpg'
-            done(null, Math.random().toString().replaceAll('.', '') + extension)
+            done(null, Math.random().toString().replace(/\./g, '') + extension)
         },
     }),
     fileFilter: (req, file, done) => {

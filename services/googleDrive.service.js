@@ -51,9 +51,9 @@ exports.generatePublicUrl = async (fileId) => {
     webViewLink: View the file in browser
     webContentLink: Direct download link 
     */
-    const result = await drive.files.get({
+    const response = await drive.files.get({
         fileId: fileId,
         fields: 'webViewLink, webContentLink',
     });
-    return result
+    return response
 }
